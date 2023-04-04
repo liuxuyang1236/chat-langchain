@@ -14,8 +14,8 @@ def ingest_docs():
     loader = PyPDFLoader("./sample_data/FAQ2022.pdf")
     raw_documents = loader.load()
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500,
-        chunk_overlap=0,
+        chunk_size=200,
+        chunk_overlap=50,
     )
     documents = text_splitter.split_documents(raw_documents)
     embeddings = OpenAIEmbeddings()

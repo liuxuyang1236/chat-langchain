@@ -55,7 +55,7 @@ async def websocket_endpoint(websocket: WebSocket):
             await websocket.send_json(start_resp.dict())
 
             result = await qa_chain.acall(
-                {"question": question, "chat_history": []}
+                {"question": question, "chat_history": chat_history}
             )
             chat_history.append((question, result["answer"]))
 
