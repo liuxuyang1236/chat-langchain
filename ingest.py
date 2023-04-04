@@ -5,15 +5,17 @@ from langchain.document_loaders import ReadTheDocsLoader
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores.faiss import FAISS
+from langchain.document_loaders import PyPDFLoader
 
 
 def ingest_docs():
     """Get documents from web pages."""
-    loader = ReadTheDocsLoader("langchain.readthedocs.io/en/latest/")
+    #loader = ReadTheDocsLoader("langchain.readthedocs.io/en/latest/")
+    loader = PyPDFLoader("./sample_data/FAQ2022.pdf")
     raw_documents = loader.load()
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=200,
+        chunk_size=500,
+        chunk_overlap=0,
     )
     documents = text_splitter.split_documents(raw_documents)
     embeddings = OpenAIEmbeddings()
